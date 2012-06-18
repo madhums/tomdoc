@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+$:.unshift File.dirname(__FILE__) + '/../lib'
+require 'tomdoc'
+
+# Process options
+TomDoc::CLI.parse_options(ARGV)

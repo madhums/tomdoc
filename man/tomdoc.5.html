@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv='content-type' value='text/html;charset=utf8'>
+  <meta name='generator' value='Ronn/v0.5'>
+  <title>tomdoc(5) -- TomDoc for Ruby - Version 0.9.0</title>
+  <style type='text/css'>
+    body {margin:0}
+    #man, #man code, #man pre, #man tt, #man kbd, #man samp {
+      font-family:consolas,monospace;
+      font-size:16px;
+      line-height:1.3;
+      color:#343331;
+      background:#fff; }
+    #man { max-width:89ex; text-align:justify; margin:0 25px 25px 25px }
+    #man h1, #man h2, #man h3 { color:#232221;clear:left }
+    #man h1 { font-size:28px; margin:15px 0 30px 0; text-align:center }
+    #man h2 { font-size:18px; margin-bottom:0; margin-top:10px; line-height:1.3; }
+    #man h3 { font-size:16px; margin:0 0 0 4ex; }
+    #man p, #man ul, #man ol, #man dl, #man pre { margin:0 0 18px 0; }
+    #man pre {
+      color:#333231;
+      background:#edeceb;
+      padding:5px 7px;
+      margin:0px 0 20px 0;
+      border-left:2ex solid #ddd}
+    #man pre + h2, #man pre + h3 {
+      margin-top:22px;
+    }
+    #man h2 + pre, #man h3 + pre {
+      margin-top:5px;
+    }
+    #man > p, #man > ul, #man > ol, #man > dl, #man > pre { margin-left:8ex; }
+    #man dt { margin:0; clear:left }
+    #man dt.flush { float:left; width:8ex }
+    #man dd { margin:0 0 0 9ex }
+    #man code, #man strong, #man b { font-weight:bold; color:#131211; }
+    #man pre code { font-weight:normal; color:#232221; background:inherit }
+    #man em, var, u {
+      font-style:normal; color:#333231; border-bottom:1px solid #999; }
+    #man h1.man-title { display:none; }
+    #man ol.man, #man ol.man li { margin:2px 0 10px 0; padding:0;
+      float:left; width:33%; list-style-type:none;
+      text-transform:uppercase; font-size:18px; color:#999;
+      letter-spacing:1px;}
+    #man ol.man { width:100%; }
+    #man ol.man li.tl { text-align:left }
+    #man ol.man li.tc { text-align:center;letter-spacing:4px }
+    #man ol.man li.tr { text-align:right }
+    #man ol.man a { color:#999 }
+    #man ol.man a:hover { color:#333231 }
+  </style>
+</head>
+<body>
+<div id='man'>
+
+<h1 class='man-title'>tomdoc(5)</h1>
+
+<ol class='head man'>
+  <li class='tl'>tomdoc(5)</li>
+  <li class='tc'>TomDoc Manual</li>
+  <li class='tr'>tomdoc(5)</li>
+</ol>
+
+<h2 id='NAME'>NAME</h2>
+<p><code>tomdoc</code> -- TomDoc for Ruby - Version 0.9.0</p>
+
+<h2>Purpose</h2>
+
+<p>TomDoc is a code documentation specification that helps you write precise
+documentation that is nice to read in plain text, yet structured enough to be
+automatically extracted and processed by a machine.</p>
+
+<p>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
+interpreted as described in RFC 2119.</p>
+
+<h2>Class/Module Documentation</h2>
+
+<p>TomDoc for classes and modules consists of a block of single comment markers
+(#) that appear directly above the class/module definition. Lines SHOULD be
+wrapped at 80 characters. Lines that contain text MUST be separated from the
+comment marker by a single space. Lines that do not contain text SHOULD
+consist of just a comment marker (no trailing spaces).</p>
+
+<p>Code examples SHOULD be indented two spaces (three spaces from the comment
+marker).</p>
+
+<pre><code># Various methods useful for performing mathematical operations. All
+# methods are module methods and should be called on the Math module.
+# For example:
+#
+#   Math.square_root(9)
+#   # =&gt; 3
+#
+module Math
+  ...
+end
+</code></pre>
+
+<h2>Method Documentation</h2>
+
+<p>A quick example will serve to best illustrate the TomDoc method documentation
+format:</p>
+
+<pre><code># Duplicate some text an abitrary number of times.
+#
+# text  - The String to be duplicated.
+# count - The Integer number of times to duplicate the text.
+#
+# Examples
+#
+#   multiplex('Tom', 4)
+#   # =&gt; 'TomTomTomTom'
+#
+# Returns the duplicated String.
+def multiplex(text, count)
+  text * count
+end
+</code></pre>
+
+<p>TomDoc for a specific method consists of a block of single comment markers (#)
+that appears directly above the method. There MUST NOT be a blank line between
+the comment block and the method definition. A TomDoc method block consists of
+a description section (required), an arguments section (required if the method
+takes any arguments), an examples section (optional), and a returns section
+(required). Lines that contain text MUST be separated from the comment
+marker by a single space. Lines that do not contain text SHOULD consist of
+just a comment marker (no trailing spaces).</p>
+
+<h3>The Description Section</h3>
+
+<p>The description section SHOULD be in plain sentences. Each sentence SHOULD end
+with a period. Good descriptions explain what the code does at a high level.
+Make sure to explain any unexpected behavior that the method may have, or any
+pitfalls that the user may experience. Lines SHOULD be wrapped at 80
+characters.</p>
+
+<p>If a method's description begins with "Public:" then that method will be
+considered part of the project's public API. For example:</p>
+
+<pre><code># Public: Initialize a new Widget.
+</code></pre>
+
+<p>This annotation is designed to let developers know which methods are
+considered stable. You SHOULD use this to document the public API of your
+project. This information can then be used along with <a href="http://semver.org">Semantic
+Versioning</a> to inform decisions on when major, minor, and
+patch versions should be incremented.</p>
+
+<p>If a method's description begins with "Deprecated:" then that method will be
+considered as deprecated and users will know that it will be removed in a
+future version.</p>
+
+<h3>The Arguments Section</h3>
+
+<p>The arguments section consists of a list of arguments. Each list item MUST be
+comprised of the name of the argument, a dash, and an explanation of the
+argument in plain sentences. The expected type (or types) of each argument
+SHOULD be clearly indicated in the explanation. When you specify a type, use
+the proper classname of the type (for instance, use 'String' instead of
+'string' to refer to a String type). The dashes following each argument name
+should be lined up in a single column. Lines SHOULD be wrapped at 80 columns.
+If an explanation is longer than that, additional lines MUST be indented at
+least two spaces but SHOULD be indented to match the indentation of the
+explanation. For example:</p>
+
+<pre><code># element - The Symbol representation of the element. The Symbol should
+#           contain only lowercase ASCII alpha characters.
+</code></pre>
+
+<p>All arguments are assumed to be required. If an argument is optional, you MUST
+specify the default value:</p>
+
+<pre><code># host - The String hostname to bind (default: '0.0.0.0').
+</code></pre>
+
+<p>For hash arguments, you SHOULD enumerate each valid option in a way similar
+to how normal arguments are defined:</p>
+
+<pre><code># options - The Hash options used to refine the selection (default: {}):
+#           :color  - The String color to restrict by (optional).
+#           :weight - The Float weight to restrict by. The weight should
+#                     be specified in grams (optional).
+</code></pre>
+
+<h3>The Examples Section</h3>
+
+<p>The examples section MUST start with the word "Examples" on a line by
+itself. The next line SHOULD be blank. The following lines SHOULD be indented
+by two spaces (three spaces from the initial comment marker) and contain code
+that shows off how to call the method and (optional) examples of what it
+returns. Everything under the "Examples" line should be considered code, so
+make sure you comment out lines that show return values. Separate examples
+should be separated by a blank line. For example:</p>
+
+<pre><code># Examples
+#
+#   multiplex('x', 4)
+#   # =&gt; 'xxxx'
+#
+#   multiplex('apple', 2)
+#   # =&gt; 'appleapple'
+</code></pre>
+
+<h3>The Returns Section</h3>
+
+<p>The returns section should explain in plain sentences what is returned from
+the method. The line MUST begin with "Returns". If only a single thing is
+returned, state the nature and type of the value. For example:</p>
+
+<pre><code># Returns the duplicated String.
+</code></pre>
+
+<p>If several different types may be returned, list all of them. For example:</p>
+
+<pre><code># Returns the given element Symbol or nil if none was found.
+</code></pre>
+
+<p>If the return value of the method is not intended to be used, then you should
+simply state:</p>
+
+<pre><code># Returns nothing.
+</code></pre>
+
+<p>If the method raises exceptions that the caller may be interested in, add
+additional lines that explain each exception and under what conditions it may
+be encountered. The lines MUST begin with "Raises". For example:</p>
+
+<pre><code># Returns nothing.
+# Raises Errno::ENOENT if the file cannot be found.
+# Raises Errno::EACCES if the file cannot be accessed.
+</code></pre>
+
+<p>Lines SHOULD be wrapped at 80 columns. Wrapped lines MUST be indented under
+the above line by at least two spaces. For example:</p>
+
+<pre><code># Returns the atomic mass of the element as a Float. The value is in
+#   unified atomic mass units.
+</code></pre>
+
+<h2>Special Considerations</h2>
+
+<h3>Attributes</h3>
+
+<p>Ruby's built in <code>attr_reader</code>, <code>attr_writer</code>, and <code>attr_accessor</code> require a
+bit more consideration. With TomDoc you SHOULD NOT use <code>attr_access</code> since it
+represents two methods with different signatures. Restricting yourself in this
+way also makes you think more carefully about the read vs. write behavior and
+whether each should be part of the Public API.</p>
+
+<p>Here is an example TomDoc for <code>attr_reader</code>.</p>
+
+<pre><code># Public: Get the user's name.
+#
+# Returns the String name of the user.
+attr_reader :name
+</code></pre>
+
+<p>Here is an example TomDoc for <code>attr_writer</code>. The parameter name should be the
+same as the attribute name.</p>
+
+<pre><code># Set the user's name.
+#
+# name - The String name of the user.
+#
+# Returns nothing.
+attr_writer :name
+</code></pre>
+
+<p>While this approach certainly takes up more space than listing dozens of
+attributes on a single line, it allows for individual documentation of each
+attribute. Attributes are an extremely important part of a class and should be
+treated with the same care as any other methods.</p>
+
+
+<ol class='foot man'>
+  <li class='tl'>MOJOMBO</li>
+  <li class='tc'>May 2010</li>
+  <li class='tr'>tomdoc(5)</li>
+</ol>
+
+</div>
+</body>
+</html>
